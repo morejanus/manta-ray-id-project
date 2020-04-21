@@ -19,20 +19,38 @@ var app = new Vue({
             "A": "Alfredi (reef)",
             "B": "Birostris (pelagic)"
         },
+        colorDict: {
+            "0": "Light",
+            "1": "Black"
+        },
 
     },
     computed: {
-        firstSize: function () {
-            console.log("firstSize: lowerRange " + this.manta.lowerRange);
+        firstSize: function ()
+        {
             if (this.manta.lowerRange && this.manta.upperRange) {
+                var tempString;
                 if (this.manta.lowerRange == this.manta.upperRange) {
-                    return "~" + this.manta.lowerRange + " feet";
-                } else {
-                    return "~" + this.manta.lowerRange + "-" + this.manta.upperRange + " feet";                  
-                }
+                    // return "~" + this.manta.lowerRange + " feet";
+                    tempString = "~" + this.manta.lowerRange + " feet";
+
+             } else {
+                    // return "~" + this.manta.lowerRange + "-" + this.manta.upperRange + " feet";                  
+                    tempString = "~" + this.manta.lowerRange + "-" + this.manta.upperRange + " feet";                  
+              }
+              if (this.manta.PupInitially === "1")
+                  tempString = tempString + " (pup)";
+              return tempString;
             } else {
                 return "Unknown";
             }
+        },
+        currentSize: function ()
+        {
+            if (this.manta.Deceased === "1")
+                return "Deceased";
+            else
+                return "";
         }
     },
     methods: {
